@@ -71,6 +71,26 @@ This package uses CSBdeep for training deep leanirng modules. Tensorflow 2.x wit
 
 2. Use **predict.ipynb** to generate segmentations
 
+#### GPU prediction with PyTorch (optional)
+
+TensorFlow >= 2.11 has no GPU support on native Windows.
+**src/torch_predict.py** rebuilds the network in PyTorch and loads the same
+`weights_best.h5`, giving the same output as `CARE.predict`
+(~25x faster on a GPU than TensorFlow on CPU).
+
+```sh
+pip install torch h5py
+```
+
+```python
+from src.torch_predict import load_model, predict
+net = load_model("models/bcm3d_ecoli")  # uses CUDA if available
+pred = predict(net, vol)                # replaces model.predict(...)
+```
+
+Check it against TensorFlow with
+`python tests/check_torch_predict.py <model_dir>`.
+
 
 <!-- LICENSE -->
 

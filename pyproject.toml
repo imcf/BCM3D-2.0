@@ -23,6 +23,9 @@ dependencies = [
 ]
 requires-python = ">=3.8"
 
+[project.optional-dependencies]
+torch = ["torch", "h5py"]
+
 
 [project.urls]
 Homepage = "https://github.com/GahlmannLab/BCM3D-2.0"
